@@ -1,31 +1,20 @@
 public class User {
     String name;
-    int age;
+    double age;
+    double height;
 
-    public User(String name, int age) {
+    public User(String name, double age, double height) {
         this.name = name;
         this.age = age;
+        this.height = height;
     }
 
-    public static void main(String[] args) {
-        User[] users = {
-                new User("Pola", 21),
-                new User("Adam", 32),
-                new User("Dawid", 24),
-                new User("Tomek", 43)
-        };
-
-        int sum = 0;
-
-        for (User user : users) {
-            sum += user.age;
-        }
-
-        double averageAge = (double) sum / users.length;
-
-        for (User user : users) {
-            if (user.age < averageAge) {
-                System.out.println(user.name);
+    public void checkUser() {
+        if (name != null) {
+            if (age > 30 && height > 160) {
+                System.out.println("User is older than 30 and taller than 160cm");
+            } else {
+                System.out.println("User is 30 (or younger) or 160cm (or shorter)");
             }
         }
     }
