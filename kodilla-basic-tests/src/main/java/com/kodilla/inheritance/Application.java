@@ -2,8 +2,11 @@ package com.kodilla.inheritance;
 
 public class Application {
 
-    public Convertible() {
-        super();
-        System.out.println("Convertible constructor");
+    public static void main(String[] args) {
+        Car car = new Car(4, 5);
+        car.turnOnLights();
+
+        Convertible convertible = new Convertible(4, 2);
+        convertible.displayNumberOfSeats();
     }
 }
