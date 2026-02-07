@@ -9,6 +9,12 @@ public class ColorDialog {
     }
 
     public static String getColorName(String letter) {
+        if (letter == null || letter.isEmpty()) {
+            return "No color provided";
+        }
+
+        letter = letter.toLowerCase();
+
         switch (letter) {
             case "r":
                 return "red";
@@ -17,7 +23,7 @@ public class ColorDialog {
             case "b":
                 return "blue";
             default:
-                return "unknown color";
+                return "Unknown color";
         }
     }
 }
