@@ -2,7 +2,7 @@ package com.kodilla.inheritance.homework;
 
 public class OperatingSystem {
 
-        protected int Year;
+    private int Year;
 
         public OperatingSystem(int Year) {
             this.Year = Year;
@@ -15,5 +15,9 @@ public class OperatingSystem {
 
         public void turnOff() {
             System.out.println("Operating system is turning off");
+        }
+
+            public int getYear() {
+                return Year;
         }
     }
