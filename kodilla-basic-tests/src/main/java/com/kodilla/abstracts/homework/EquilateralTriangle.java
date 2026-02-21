@@ -1,10 +1,10 @@
 package com.kodilla.abstracts.homework;
 
-public class Triangle extends Shape{
+public class EquilateralTriangle extends Shape{
 
         private double side;
 
-        public Triangle(double side) {
+        public EquilateralTriangle(double side) {
             this.side = side;
         }
 
