@@ -6,16 +6,19 @@ public class Porsche implements Car {
 
     @Override
     public int getSpeed() {
+
         return speed;
     }
 
     @Override
     public void increaseSpeed() {
+
         speed += 30;
     }
 
     @Override
     public void decreaseSpeed() {
-        speed -= 20;
+
+        speed = Math.max(0, speed - 20);
     }
 }

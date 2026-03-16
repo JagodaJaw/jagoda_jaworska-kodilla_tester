@@ -6,16 +6,19 @@ public class BMW implements Car {
 
     @Override
     public int getSpeed() {
+
         return speed;
     }
 
     @Override
     public void increaseSpeed() {
+
         speed += 25;
     }
 
     @Override
     public void decreaseSpeed() {
-        speed -= 15;
+
+        speed = Math.max(0, speed - 15);
     }
 }

@@ -92,4 +92,24 @@ public class CashMachine {
 
         return sum;
     }
+
+    public double getAverageDeposit() {
+        int count = getDepositCount();
+
+        if (count == 0) {
+            return 0;
+        }
+
+        return (double) getDepositSum() / count;
+    }
+
+    public double getAverageWithdrawal() {
+        int count = getWithdrawalCount();
+
+        if (count == 0) {
+            return 0;
+        }
+
+        return (double) getWithdrawalSum() / count;
+    }
 }

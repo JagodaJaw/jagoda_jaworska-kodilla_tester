@@ -11,14 +11,14 @@ public class CarRace {
         car.decreaseSpeed();
         car.decreaseSpeed();
 
-        System.out.println(car.getSpeed());
+        System.out.println("Speed: " + car.getSpeed());
     }
 
     public static void main(String[] args) {
 
-        BMW bmw = new BMW();
-        Fiat fiat = new Fiat();
-        Porsche porsche = new Porsche();
+        Car bmw = new BMW();
+        Car fiat = new Fiat();
+        Car porsche = new Porsche();
 
         doRace(bmw);
         doRace(fiat);

@@ -76,4 +76,26 @@ class CashMachineTestSuite {
 
         assertEquals(0, machine.getTransactionsCount());
     }
+
+    @Test
+    void shouldReturnZeroAverageDepositWhenNoDeposits() {
+        CashMachine machine = new CashMachine();
+        machine.addTransaction(-100);
+        machine.addTransaction(-50);
+
+        double result = machine.getAverageDeposit();
+
+        assertEquals(0, result, 0.01);
+    }
+
+    @Test
+    void shouldReturnZeroAverageWithdrawalWhenNoWithdrawals() {
+        CashMachine machine = new CashMachine();
+        machine.addTransaction(100);
+        machine.addTransaction(50);
+
+        double result = machine.getAverageWithdrawal();
+
+        assertEquals(0, result, 0.01);
+    }
 }

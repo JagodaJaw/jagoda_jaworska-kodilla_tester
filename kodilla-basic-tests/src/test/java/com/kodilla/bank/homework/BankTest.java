@@ -90,5 +90,6 @@ class BankTestSuite {
         double average = bank.getAverageWithdrawal();
 
         assertEquals(-200, average);
+
     }
 }

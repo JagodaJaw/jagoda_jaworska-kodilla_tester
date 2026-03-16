@@ -30,57 +30,33 @@ public class Bank {
     }
 
     public int getDepositCount() {
-
         int count = 0;
 
         for (int i = 0; i < machines.length; i++) {
-
-            int[] transactions = machines[i].getTransactions();
-
-            for (int j = 0; j < transactions.length; j++) {
-                if (transactions[j] > 0) {
-                    count++;
-                }
-            }
+            count += machines[i].getDepositCount();
         }
 
         return count;
+
     }
 
     public int getWithdrawalCount() {
-
         int count = 0;
 
         for (int i = 0; i < machines.length; i++) {
-
-            int[] transactions = machines[i].getTransactions();
-
-            for (int j = 0; j < transactions.length; j++) {
-                if (transactions[j] < 0) {
-                    count++;
-                }
-            }
+            count += machines[i].getWithdrawalCount();
         }
 
         return count;
     }
 
     public double getAverageDeposit() {
-
         int sum = 0;
         int count = 0;
 
         for (int i = 0; i < machines.length; i++) {
-
-            int[] transactions = machines[i].getTransactions();
-
-            for (int j = 0; j < transactions.length; j++) {
-
-                if (transactions[j] > 0) {
-                    sum += transactions[j];
-                    count++;
-                }
-            }
+            sum += machines[i].getDepositSum();
+            count += machines[i].getDepositCount();
         }
 
         if (count == 0) {
@@ -90,22 +66,14 @@ public class Bank {
         return (double) sum / count;
     }
 
-    public double getAverageWithdrawal() {
 
+    public double getAverageWithdrawal() {
         int sum = 0;
         int count = 0;
 
         for (int i = 0; i < machines.length; i++) {
-
-            int[] transactions = machines[i].getTransactions();
-
-            for (int j = 0; j < transactions.length; j++) {
-
-                if (transactions[j] < 0) {
-                    sum += transactions[j];
-                    count++;
-                }
-            }
+            sum += machines[i].getWithdrawalSum();
+            count += machines[i].getWithdrawalCount();
         }
 
         if (count == 0) {
