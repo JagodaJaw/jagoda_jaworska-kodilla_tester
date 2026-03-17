@@ -3,22 +3,34 @@ package com.kodilla.collections.arrays.homework;
 import com.kodilla.collections.interfaces.homework.*;
 
 import java.util.Random;
-
+import java.util.Random;
+import com.kodilla.collections.interfaces.homework.*;
 public class CarsApplication {
+
+
 
     public static Car drawCar() {
 
         Random random = new Random();
-        int drawnCarKind = random.nextInt(3);
 
-        if (drawnCarKind == 0)
-            return new BMW();
+        int carType = random.nextInt(3);
+        Car car;
 
-        else if (drawnCarKind == 1)
-            return new Fiat();
+        if (carType == 0) {
+            car = new BMW();
+        } else if (carType == 1) {
+            car = new Fiat();
+        } else {
+            car = new Porsche();
+        }
 
-        else
-            return new Porsche();
+        int speedIncrease = random.nextInt(10) + 1;
+
+        for (int i = 0; i < speedIncrease; i++) {
+            car.increaseSpeed();
+        }
+
+        return car;
     }
 
     public static void main(String[] args) {

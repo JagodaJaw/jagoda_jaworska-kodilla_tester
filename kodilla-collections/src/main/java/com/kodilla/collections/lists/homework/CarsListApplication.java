@@ -5,6 +5,8 @@ import com.kodilla.collections.interfaces.homework.BMW;
 import com.kodilla.collections.interfaces.homework.Fiat;
 import com.kodilla.collections.interfaces.homework.Porsche;
 import com.kodilla.collections.interfaces.homework.Car;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class CarsListApplication {
 
     public static void main(String[] args) {
 
-        ArrayList<Car> cars = new ArrayList<>();
+        List<Car> cars = new ArrayList<>();
 
         cars.add(new BMW());
         cars.add(new Fiat());
