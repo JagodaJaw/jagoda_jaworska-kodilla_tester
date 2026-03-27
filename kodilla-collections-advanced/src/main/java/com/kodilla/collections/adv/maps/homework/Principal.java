@@ -2,19 +2,19 @@ package com.kodilla.collections.adv.maps.homework;
 
 public class Principal {
 
-        private String firstName;
-        private String schoolName;
+    private String firstName;
+    private String lastName; // dodane (mile widziane)
 
-        public Principal(String firstName, String schoolName) {
-            this.firstName = firstName;
-            this.schoolName = schoolName;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public String getSchoolName() {
-            return schoolName;
-        }
+    public Principal(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+}
