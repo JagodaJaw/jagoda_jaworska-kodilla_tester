@@ -11,7 +11,7 @@ class FlightFinderTest {
     @Test
     void testFindFlightsFrom() {
         // given
-        FlightFinder finder = new FlightFinder();
+        FlightFinder finder = new FlightFinder(FlightRepository.getFlightsTable());
 
         // when
         List<Flight> result = finder.findFlightsFrom("Warsaw");
@@ -24,7 +24,7 @@ class FlightFinderTest {
     @Test
     void testFindFlightsTo() {
         // given
-        FlightFinder finder = new FlightFinder();
+        FlightFinder finder = new FlightFinder(FlightRepository.getFlightsTable());
 
         // when
         List<Flight> result = finder.findFlightsTo("London");
@@ -32,5 +32,29 @@ class FlightFinderTest {
         // then
         assertEquals(2, result.size());
         assertTrue(result.stream().allMatch(f -> f.getArrival().equals("London")));
+    }
+    @Test
+    void testCityNotFound() {
+        FlightFinder finder = new FlightFinder(FlightRepository.getFlightsTable());
+
+        List<Flight> result = finder.findFlightsFrom("Madrid");
+
+        assertTrue(result.isEmpty());
+    }
+    @Test
+    void testNullInput() {
+        FlightFinder finder = new FlightFinder(FlightRepository.getFlightsTable());
+
+        List<Flight> result = finder.findFlightsFrom(null);
+
+        assertTrue(result.isEmpty());
+    }
+    @Test
+    void testCityOnlyAsArrival() {
+        FlightFinder finder = new FlightFinder(FlightRepository.getFlightsTable());
+
+        List<Flight> result = finder.findFlightsFrom("Rome");
+
+        assertTrue(result.isEmpty());
     }
 }
