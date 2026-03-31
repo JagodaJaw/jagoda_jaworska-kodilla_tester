@@ -14,12 +14,6 @@ public class UsersRepository {
         users.add(new User("Gale Boetticher", 44, 2, "Chemists"));
         users.add(new User("Mike Ehrmantraut", 57, 0, "Security"));
         return users;
-    }
-    public static List<User> getUsersOlderThan(int age) {
-        return UsersRepository.getUsersList()
-                .stream()
-                .filter(user -> user.getAge() > age)
-                .collect(Collectors.toList());
-
-    }
+    };
 }
+

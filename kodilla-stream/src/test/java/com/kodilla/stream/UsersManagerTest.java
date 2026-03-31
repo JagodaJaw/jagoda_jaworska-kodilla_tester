@@ -9,45 +9,51 @@ import static org.junit.jupiter.api.Assertions.*;
 class UsersManagerTest {
 
     @Test
-    void testFilterChemistGroupUsernames() {
-        // when
-        List<String> result = UsersManager.filterChemistGroupUsernames();
+    void testFilterUsersOlderThan() {
+        List<User> users = List.of(
+                new User("A", 20, 1, "X"),
+                new User("B", 40, 2, "Y"),
+                new User("C", 50, 3, "Z")
+        );
 
-        // then
+        UsersManager manager = new UsersManager(users);
+
+        List<User> result = manager.filterUsersOlderThan(30);
+
+        assertEquals(2, result.size());
+        assertTrue(result.stream().allMatch(u -> u.getAge() > 30));
+    }
+
+    @Test
+    void testFilterChemistGroupUsernames() {
+        List<User> users = List.of(
+                new User("Walter White", 50, 7, "Chemists"),
+                new User("Jesse Pinkman", 25, 4648, "Sales"),
+                new User("Gale", 44, 2, "Chemists")
+        );
+
+        UsersManager manager = new UsersManager(users);
+
+        List<String> result = manager.filterChemistGroupUsernames();
+
         assertEquals(2, result.size());
         assertTrue(result.contains("Walter White"));
-        assertTrue(result.contains("Gale Boetticher"));
+        assertTrue(result.contains("Gale"));
     }
 
-    @Test
-    void testFilterUsersOlderThan() {
-        // when
-        List<User> result = UsersManager.filterUsersOlderThan(40);
-
-        // then
-        for (User user : result) {
-            assertTrue(user.getAge() > 40);
-        }
-    }
-
-    @Test
-    void testFilterUsersWithManyPosts() {
-        // when
-        List<User> result = UsersManager.filterUsersWithManyPosts(100);
-
-        // then
-        for (User user : result) {
-            assertTrue(user.getNumberOfPost() > 100);
-        }
-    }
     @Test
     void testFilterActiveChemistsUsernames() {
-        // when
-        List<String> result = UsersManager.filterActiveChemistsUsernames(1);
+        List<User> users = List.of(
+                new User("Walter White", 50, 7, "Chemists"),
+                new User("Gale", 44, 2, "Chemists"),
+                new User("Jesse", 30, 100, "Sales")
+        );
 
-        // then
-        assertEquals(2, result.size());
-        assertTrue(result.contains("Walter White"));
-        assertTrue(result.contains("Gale Boetticher"));
+        UsersManager manager = new UsersManager(users);
+
+        List<String> result = manager.filterActiveChemistsUsernames(5);
+
+        assertEquals(1, result.size());
+        assertEquals("Walter White", result.get(0));
     }
 }
