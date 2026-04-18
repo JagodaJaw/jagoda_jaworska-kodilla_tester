@@ -1,6 +1,7 @@
 package com.kodilla.stream.homework;
 
 import com.kodilla.stream.User;
+import com.kodilla.stream.UsersRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -87,5 +88,36 @@ class ForumStatsTest {
         double result = stats.averagePostsAbove40(users);
 
         assertEquals(10.0, result);
+    }
+
+    @Test
+    void testBoundaryAge40() {
+        // given
+        List<User> users = List.of(
+                new User("A", 40, 100, "X"),
+                new User("B", 39, 10, "X")
+        );
+
+        // when
+        double aboveOrEqual40 = stats.averagePostsAbove40(users);
+        double below40 = stats.averagePostsBelow40(users);
+
+        // then
+        assertEquals(100.0, aboveOrEqual40);
+        assertEquals(10.0, below40);
+    }
+
+    @Test
+    void testAveragesForUsersRepositoryData() {
+        // given
+        List<User> users = UsersRepository.getUsersList();
+
+        // when
+        double aboveOrEqual40 = stats.averagePostsAbove40(users);
+        double below40 = stats.averagePostsBelow40(users);
+
+        // then
+        assertEquals(2.25, aboveOrEqual40);
+        assertEquals(2382.0, below40);
     }
 }

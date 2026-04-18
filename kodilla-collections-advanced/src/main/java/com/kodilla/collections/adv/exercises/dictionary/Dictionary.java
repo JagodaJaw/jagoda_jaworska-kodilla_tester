@@ -4,9 +4,12 @@ import java.util.*;
 
 
 public class Dictionary {
-    Map<String, List<EnglishWord>> dictionary = new HashMap<>();
+    private final Map<String, List<EnglishWord>> dictionary = new HashMap<>();
 
     public void addWord(String polishWord, EnglishWord englishWord) {
+        Objects.requireNonNull(polishWord, "polishWord cannot be null");
+        Objects.requireNonNull(englishWord, "englishWord cannot be null");
+
         List<EnglishWord> englishWords =
                 dictionary.getOrDefault(polishWord, new ArrayList<>());
         englishWords.add(englishWord);
@@ -15,21 +18,18 @@ public class Dictionary {
 
 
     public List<EnglishWord> findEnglishWords(String polishWord, PartOfSpeech partOfSpeech) {
+        Objects.requireNonNull(polishWord, "polishWord cannot be null");
+        Objects.requireNonNull(partOfSpeech, "partOfSpeech cannot be null");
+
         List<EnglishWord> result = new ArrayList<>();
-
-        for (Map.Entry<String, List<EnglishWord>> entry : dictionary.entrySet()) {
-            String key = entry.getKey();
-
-            if (key.startsWith(polishWord.substring(0, 3))) {
-                for (EnglishWord englishWord : entry.getValue()) {
-                    if (englishWord.getPartOfSpeech() == partOfSpeech) {
-                        result.add(englishWord);
-                    }
-                }
+        List<EnglishWord> englishWords = dictionary.getOrDefault(polishWord, Collections.emptyList());
+        for (EnglishWord englishWord : englishWords) {
+            if (englishWord.getPartOfSpeech() == partOfSpeech) {
+                result.add(englishWord);
             }
         }
 
-        return result;
+        return Collections.unmodifiableList(result);
     }
 
     public int size() {
@@ -43,6 +43,9 @@ public class Dictionary {
     }
 
     public List<EnglishWord> findEnglishWords(String polishWord) {
-        return dictionary.getOrDefault(polishWord, Collections.emptyList());
+        Objects.requireNonNull(polishWord, "polishWord cannot be null");
+        return Collections.unmodifiableList(new ArrayList<>(
+                dictionary.getOrDefault(polishWord, Collections.emptyList())
+        ));
     }
 }

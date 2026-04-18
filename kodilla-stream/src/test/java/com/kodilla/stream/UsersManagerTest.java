@@ -10,50 +10,46 @@ class UsersManagerTest {
 
     @Test
     void testFilterUsersOlderThan() {
-        List<User> users = List.of(
-                new User("A", 20, 1, "X"),
-                new User("B", 40, 2, "Y"),
-                new User("C", 50, 3, "Z")
+        // when
+        List<User> result = UsersManager.filterUsersOlderThan(40);
+
+        // then
+        List<User> expected = List.of(
+                new User("Walter White", 50, 7, "Chemists"),
+                new User("Gus Firing", 49, 0, "Board"),
+                new User("Gale Boetticher", 44, 2, "Chemists"),
+                new User("Mike Ehrmantraut", 57, 0, "Security")
         );
-
-        UsersManager manager = new UsersManager(users);
-
-        List<User> result = manager.filterUsersOlderThan(30);
-
-        assertEquals(2, result.size());
-        assertTrue(result.stream().allMatch(u -> u.getAge() > 30));
+        assertEquals(expected, result);
     }
 
     @Test
     void testFilterChemistGroupUsernames() {
-        List<User> users = List.of(
-                new User("Walter White", 50, 7, "Chemists"),
-                new User("Jesse Pinkman", 25, 4648, "Sales"),
-                new User("Gale", 44, 2, "Chemists")
-        );
+        // when
+        List<String> result = UsersManager.filterChemistGroupUsernames();
 
-        UsersManager manager = new UsersManager(users);
-
-        List<String> result = manager.filterChemistGroupUsernames();
-
-        assertEquals(2, result.size());
-        assertTrue(result.contains("Walter White"));
-        assertTrue(result.contains("Gale"));
+        // then
+        List<String> expected = List.of("Walter White", "Gale Boetticher");
+        assertEquals(expected, result);
     }
 
     @Test
     void testFilterActiveChemistsUsernames() {
-        List<User> users = List.of(
-                new User("Walter White", 50, 7, "Chemists"),
-                new User("Gale", 44, 2, "Chemists"),
-                new User("Jesse", 30, 100, "Sales")
-        );
+        // when
+        List<String> result = UsersManager.filterActiveChemistsUsernames(5);
 
-        UsersManager manager = new UsersManager(users);
-
-        List<String> result = manager.filterActiveChemistsUsernames(5);
-
+        // then
         assertEquals(1, result.size());
         assertEquals("Walter White", result.get(0));
+    }
+
+    @Test
+    void testFilterUsernamesWithPostsAtLeast() {
+        // when
+        List<String> result = UsersManager.filterUsernamesWithPostsAtLeast(100);
+
+        // then
+        List<String> expected = List.of("Jessie Pinkman", "Tuco Salamanca");
+        assertEquals(expected, result);
     }
 }
