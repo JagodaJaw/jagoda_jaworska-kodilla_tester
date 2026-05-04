@@ -16,4 +16,8 @@ public class StringManipulator {
         }
         return count;
     }
+
+    public int calculateStringLengthWithoutSpaces(String input) {
+        return input.replace(" ", "").length();
+    }
 }
