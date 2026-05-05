@@ -1,0 +1,6 @@
+"one,two,three";2
+"no commas here";0
+",starts with comma";1
+"ends with comma,";1
+",,,";3
+"a,b,c,d,e";4
