@@ -69,14 +69,33 @@ class ForumStatsTest {
     }
 
     @Test
-    void testEmptyList() {
+    void testEmptyListForUsersAbove40() {
         List<User> users = List.of();
 
-        double above = stats.averagePostsAbove40(users);
-        double below = stats.averagePostsBelow40(users);
+        double result = stats.averagePostsAbove40(users);
 
-        assertEquals(0.0, above);
-        assertEquals(0.0, below);
+        assertEquals(0.0, result);
+    }
+
+    @Test
+    void testEmptyListForUsersBelow40() {
+        List<User> users = List.of();
+
+        double result = stats.averagePostsBelow40(users);
+
+        assertEquals(0.0, result);
+    }
+
+    @Test
+    void testAverageIncludesUserWithZeroPosts() {
+        List<User> users = List.of(
+                new User("A", 45, 0, "X"),
+                new User("B", 50, 10, "X")
+        );
+
+        double result = stats.averagePostsAbove40(users);
+
+        assertEquals(5.0, result);
     }
 
     @Test
