@@ -12,7 +12,7 @@ class UserValidatorTest {
     private UserValidator validator = new UserValidator();
 
     @ParameterizedTest
-    @ValueSource(strings = {"user123", "john.doe", "anna_nowak", "test-user"})
+    @ValueSource(strings = {"abc", "user123", "john.doe", "anna_nowak", "test-user"})
     public void shouldReturnTrueIfUsernameIsValid(String username) {
         assertTrue(validator.validateUsername(username));
     }
@@ -25,7 +25,7 @@ class UserValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"user@example.com", "john.doe@test.pl", "anna_nowak-1@mail.co"})
+    @ValueSource(strings = {"user@example.com", "john.doe@test.pl", "anna_nowak-1@mail.co", "user@sub.example.com"})
     public void shouldReturnTrueIfEmailIsValid(String email) {
         assertTrue(validator.validateEmail(email));
     }
