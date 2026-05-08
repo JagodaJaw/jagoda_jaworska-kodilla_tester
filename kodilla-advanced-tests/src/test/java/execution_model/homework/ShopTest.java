@@ -100,21 +100,71 @@ public class ShopTest {
     }
 
     @Test
-    public void shouldReturnEmptyDataForEmptyShop() {
+    public void shouldReturnEmptyListFromDateRangeForEmptyShop() {
         //Given
         Shop shop = new Shop();
 
         //When
-        List<Order> ordersFromDateRange = shop.getOrdersFromDateRange(
+        List<Order> result = shop.getOrdersFromDateRange(
                 LocalDate.of(2026, 5, 1),
                 LocalDate.of(2026, 5, 3));
-        List<Order> ordersFromValueRange = shop.getOrdersFromValueRange(100.00, 250.00);
 
         //Then
-        assertTrue(ordersFromDateRange.isEmpty());
-        assertTrue(ordersFromValueRange.isEmpty());
-        assertEquals(0, shop.getNumberOfOrders());
-        assertEquals(0.00, shop.getTotalValue(), 0.01);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnEmptyListFromValueRangeForEmptyShop() {
+        //Given
+        Shop shop = new Shop();
+
+        //When
+        List<Order> result = shop.getOrdersFromValueRange(100.00, 250.00);
+
+        //Then
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnZeroOrderCountForEmptyShop() {
+        //Given
+        Shop shop = new Shop();
+
+        //When
+        int result = shop.getNumberOfOrders();
+
+        //Then
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void shouldReturnZeroTotalValueForEmptyShop() {
+        //Given
+        Shop shop = new Shop();
+
+        //When
+        double result = shop.getTotalValue();
+
+        //Then
+        assertEquals(0.00, result, 0.01);
+    }
+
+    @Test
+    public void shouldReturnOrdersFromDateRangeWhenStartDateEqualsEndDate() {
+        //Given
+        Order orderFromSelectedDate = order(120.00, 2026, 5, 1, "user2");
+        Shop shop = shopWith(
+                order(80.00, 2026, 4, 30, "user1"),
+                orderFromSelectedDate,
+                order(240.00, 2026, 5, 3, "user3"));
+
+        //When
+        List<Order> result = shop.getOrdersFromDateRange(
+                LocalDate.of(2026, 5, 1),
+                LocalDate.of(2026, 5, 1));
+
+        //Then
+        assertEquals(List.of(orderFromSelectedDate), result);
     }
 
     @Test
@@ -147,12 +197,20 @@ public class ShopTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenDateRangeContainsNull() {
+    public void shouldThrowExceptionWhenDateRangeContainsNullStartDate() {
         //Given
         Shop shop = new Shop();
 
         //When & Then
         assertThrows(NullPointerException.class, () -> shop.getOrdersFromDateRange(null, LocalDate.of(2026, 5, 3)));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenDateRangeContainsNullEndDate() {
+        //Given
+        Shop shop = new Shop();
+
+        //When & Then
         assertThrows(NullPointerException.class, () -> shop.getOrdersFromDateRange(LocalDate.of(2026, 5, 1), null));
     }
 
