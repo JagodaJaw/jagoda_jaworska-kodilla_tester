@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShippingCenter {
 
-    private DeliveryService deliveryService;
-    private NotificationService notificationService;
+    private final DeliveryService deliveryService;
+    private final NotificationService notificationService;
 
     public ShippingCenter(DeliveryService deliveryService, NotificationService notificationService) {
         this.deliveryService = deliveryService;
