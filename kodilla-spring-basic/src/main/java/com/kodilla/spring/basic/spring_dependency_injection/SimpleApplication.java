@@ -1,13 +1,16 @@
 package com.kodilla.spring.basic.spring_dependency_injection;
 
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleApplication {
 
-    @Resource(name = "skypeMessageService")
-    private MessageService messageService;
+    private final MessageService messageService;
+
+    public SimpleApplication(@Qualifier("skypeMessageService") MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     public String processMessage(String message, String receiver) {
         if (checkReceiver(receiver)) {

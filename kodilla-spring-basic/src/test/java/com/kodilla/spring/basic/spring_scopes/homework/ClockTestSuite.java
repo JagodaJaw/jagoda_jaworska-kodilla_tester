@@ -11,7 +11,7 @@ public class ClockTestSuite {
 
     @Test
     public void shouldCreateClocksWithDifferentTimes() throws InterruptedException {
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring.basic.spring_scopes.homework");
         Clock firstClock = context.getBean(Clock.class);
         Thread.sleep(5);
         Clock secondClock = context.getBean(Clock.class);

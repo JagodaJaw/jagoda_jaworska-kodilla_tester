@@ -11,7 +11,7 @@ public class TaskTestSuite {
 
     @Test
     public void shouldCreateDifferentTasks() {
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring.basic.spring_scopes");
         Task firstBean = context.getBean(Task.class);
         Task secondBean = context.getBean(Task.class);
         Task thirdBean = context.getBean(Task.class);

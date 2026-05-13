@@ -3,7 +3,7 @@ package com.kodilla.spring.basic.dependency_injection;
 public class SimpleApplication {
 
 
-    private MessageService messageService;
+    private final MessageService messageService;
 
     public void processMessage(String message, String receiver) {
         if (checkReceiver(receiver)) {
