@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -32,7 +33,10 @@ public class BookController {
     }
 
     @DeleteMapping
-    public void deleteBook(@RequestBody BookDto bookDto) {
-        bookService.deleteBook(bookDto);
+    public ResponseEntity<Void> deleteBook(@RequestBody BookDto bookDto) {
+        if (bookService.deleteBook(bookDto)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

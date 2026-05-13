@@ -18,7 +18,7 @@ public class BookService {
         books.add(bookDto);
     }
 
-    public void deleteBook(BookDto bookDto) {
-        books.remove(bookDto);
+    public boolean deleteBook(BookDto bookDto) {
+        return books.remove(bookDto);
     }
 }

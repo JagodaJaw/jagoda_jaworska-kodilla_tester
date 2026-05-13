@@ -71,4 +71,42 @@ class BookControllerRestAssuredTest {
                 .status(HttpStatus.OK);
         Mockito.verify(bookService).addBook(bookDto);
     }
+
+    @Test
+    void shouldDeleteBook() {
+        // given
+        BookDto bookDto = new BookDto("Title 1", "Author 1");
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(bookDto);
+        Mockito.when(bookService.deleteBook(bookDto)).thenReturn(true);
+
+        // when then
+        given()
+                .contentType(ContentType.JSON)
+                .body(jsonContent)
+        .when()
+                .delete("/books")
+        .then()
+                .status(HttpStatus.NO_CONTENT);
+        Mockito.verify(bookService).deleteBook(bookDto);
+    }
+
+    @Test
+    void shouldReturnNotFoundWhenDeletingMissingBook() {
+        // given
+        BookDto bookDto = new BookDto("Title 1", "Author 1");
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(bookDto);
+        Mockito.when(bookService.deleteBook(bookDto)).thenReturn(false);
+
+        // when then
+        given()
+                .contentType(ContentType.JSON)
+                .body(jsonContent)
+        .when()
+                .delete("/books")
+        .then()
+                .status(HttpStatus.NOT_FOUND);
+        Mockito.verify(bookService).deleteBook(bookDto);
+    }
 }

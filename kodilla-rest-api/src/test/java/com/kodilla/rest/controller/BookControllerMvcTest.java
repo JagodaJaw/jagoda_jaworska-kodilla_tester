@@ -60,4 +60,38 @@ public class BookControllerMvcTest {
                 .andExpect(MockMvcResultMatchers.status().is(200));
         Mockito.verify(bookService).addBook(bookDto);
     }
+
+    @Test
+    public void shouldDeleteBook() throws Exception {
+        //given
+        BookDto bookDto = new BookDto("title 1", "author 1");
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(bookDto);
+        Mockito.when(bookService.deleteBook(bookDto)).thenReturn(true);
+
+        //when & then
+        mockMvc.perform(MockMvcRequestBuilders.delete("/books")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+                        .content(jsonContent))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+        Mockito.verify(bookService).deleteBook(bookDto);
+    }
+
+    @Test
+    public void shouldReturnNotFoundWhenDeletingMissingBook() throws Exception {
+        //given
+        BookDto bookDto = new BookDto("title 1", "author 1");
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(bookDto);
+        Mockito.when(bookService.deleteBook(bookDto)).thenReturn(false);
+
+        //when & then
+        mockMvc.perform(MockMvcRequestBuilders.delete("/books")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8")
+                        .content(jsonContent))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+        Mockito.verify(bookService).deleteBook(bookDto);
+    }
 }
