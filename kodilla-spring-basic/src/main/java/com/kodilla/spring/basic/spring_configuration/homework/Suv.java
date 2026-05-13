@@ -1,16 +1,9 @@
 package com.kodilla.spring.basic.spring_configuration.homework;
 
-public class Suv implements Car {
-
-    private boolean headlightsTurnedOn;
+public class Suv extends AbstractCar {
 
     public Suv(boolean headlightsTurnedOn) {
-        this.headlightsTurnedOn = headlightsTurnedOn;
-    }
-
-    @Override
-    public boolean hasHeadlightsTurnedOn() {
-        return headlightsTurnedOn;
+        super(headlightsTurnedOn);
     }
 
     @Override

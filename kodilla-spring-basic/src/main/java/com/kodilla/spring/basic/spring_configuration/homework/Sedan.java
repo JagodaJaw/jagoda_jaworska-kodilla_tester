@@ -1,16 +1,9 @@
 package com.kodilla.spring.basic.spring_configuration.homework;
 
-public class Sedan implements Car {
-
-    private boolean headlightsTurnedOn;
+public class Sedan extends AbstractCar {
 
     public Sedan(boolean headlightsTurnedOn) {
-        this.headlightsTurnedOn = headlightsTurnedOn;
-    }
-
-    @Override
-    public boolean hasHeadlightsTurnedOn() {
-        return headlightsTurnedOn;
+        super(headlightsTurnedOn);
     }
 
     @Override
