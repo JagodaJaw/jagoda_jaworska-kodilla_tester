@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="samochod">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="marka" type="xs:string"/>
+                <xs:element name="model" type="xs:string"/>
+                <xs:element name="rokProdukcji" type="rokProdukcjiType"/>
+                <xs:element name="kolor" type="xs:string"/>
+                <xs:element name="nadwozie" type="nadwozieType"/>
+                <xs:element name="silnik" type="silnikType"/>
+                <xs:element name="skrzyniaBiegow" type="skrzyniaBiegowType"/>
+                <xs:element name="liczbaDrzwi" type="liczbaDrzwiType"/>
+                <xs:element name="przebiegKm" type="xs:nonNegativeInteger"/>
+                <xs:element name="wyposazenie" type="wyposazenieType"/>
+            </xs:sequence>
+            <xs:attribute name="vin" type="vinType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="silnikType">
+        <xs:sequence>
+            <xs:element name="rodzajPaliwa" type="rodzajPaliwaType"/>
+            <xs:element name="pojemnoscCm3" type="pojemnoscType"/>
+            <xs:element name="mocKM" type="mocType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="wyposazenieType">
+        <xs:sequence>
+            <xs:element name="element" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="vinType">
+        <xs:restriction base="xs:string">
+            <xs:length value="17"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="rokProdukcjiType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1886"/>
+            <xs:maxInclusive value="2100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nadwozieType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sedan"/>
+            <xs:enumeration value="hatchback"/>
+            <xs:enumeration value="kombi"/>
+            <xs:enumeration value="suv"/>
+            <xs:enumeration value="coupe"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="rodzajPaliwaType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="benzyna"/>
+            <xs:enumeration value="diesel"/>
+            <xs:enumeration value="hybryda"/>
+            <xs:enumeration value="elektryczny"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="skrzyniaBiegowType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="manualna"/>
+            <xs:enumeration value="automatyczna"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="liczbaDrzwiType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="2"/>
+            <xs:maxInclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pojemnoscType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="500"/>
+            <xs:maxInclusive value="8000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="mocType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="20"/>
+            <xs:maxInclusive value="2000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

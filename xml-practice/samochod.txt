@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<samochod vin="WVWZZZ1JZXW000001">
+    <marka>Volkswagen</marka>
+    <model>Golf</model>
+    <rokProdukcji>2022</rokProdukcji>
+    <kolor>niebieski</kolor>
+    <nadwozie>hatchback</nadwozie>
+    <silnik>
+        <rodzajPaliwa>benzyna</rodzajPaliwa>
+        <pojemnoscCm3>1498</pojemnoscCm3>
+        <mocKM>150</mocKM>
+    </silnik>
+    <skrzyniaBiegow>automatyczna</skrzyniaBiegow>
+    <liczbaDrzwi>5</liczbaDrzwi>
+    <przebiegKm>18450</przebiegKm>
+    <wyposazenie>
+        <element>klimatyzacja</element>
+        <element>kamera cofania</element>
+        <element>tempomat</element>
+    </wyposazenie>
+</samochod>
