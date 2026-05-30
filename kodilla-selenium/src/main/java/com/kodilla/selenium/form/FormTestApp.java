@@ -1,31 +1,24 @@
-package com.kodilla.selenium.search;
+package com.kodilla.selenium.form;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
-
-public class StoreSearchExample {
-    public static void main(String[] args) {
-        String query = args.length > 0 ? args[0] : "School";
+public class FormTestApp {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = createDriver();
 
         try {
-            driver.get("https://kodilla.com/pl/test/store");
+            driver.get("https://kodilla.com/pl/test/form");
 
-            WebElement inputField = driver.findElement(By.name("search"));
-            inputField.sendKeys(query);
+            WebElement yearCombo = driver.findElement(By.xpath("//*[@id=\"birthday_wrapper\"]/select[3]"));
+            Select yearSelect = new Select(yearCombo);
+            yearSelect.selectByIndex(5);
 
-            List<WebElement> products = driver.findElements(By.className("element"));
-            System.out.println("Search phrase: " + query);
-            System.out.println("Found products: " + products.size());
-
-            for (WebElement product : products) {
-                System.out.println("- " + product.getText());
-            }
+            Thread.sleep(5000);
         } finally {
             driver.quit();
         }

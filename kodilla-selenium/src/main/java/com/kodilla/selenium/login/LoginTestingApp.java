@@ -1,4 +1,4 @@
-package com.kodilla.selenium.search;
+package com.kodilla.selenium.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,26 +6,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.List;
-
-public class StoreSearchExample {
-    public static void main(String[] args) {
-        String query = args.length > 0 ? args[0] : "School";
+public class LoginTestingApp {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = createDriver();
 
         try {
-            driver.get("https://kodilla.com/pl/test/store");
+            driver.get("https://kodilla.com/pl/test/login");
 
-            WebElement inputField = driver.findElement(By.name("search"));
-            inputField.sendKeys(query);
+            WebElement emailField = driver.findElement(By.xpath("//html/body/section/form/div[1]/input"));
+            emailField.sendKeys("test@kodilla.com");
 
-            List<WebElement> products = driver.findElements(By.className("element"));
-            System.out.println("Search phrase: " + query);
-            System.out.println("Found products: " + products.size());
+            WebElement passwordField = driver.findElement(By.xpath("//html/body/section/form/div[2]/input"));
+            passwordField.sendKeys("kodilla123");
 
-            for (WebElement product : products) {
-                System.out.println("- " + product.getText());
-            }
+            Thread.sleep(5000);
         } finally {
             driver.quit();
         }

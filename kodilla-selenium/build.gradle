@@ -19,7 +19,43 @@ test {
     useJUnitPlatform()
 }
 
-tasks.register('runEbay', JavaExec) {
-    mainClass = 'com.kodilla.selenium.ebay.EBayTestingApp'
+tasks.register('runStoreSearch', JavaExec) {
+    group = 'application'
+    description = 'Runs the Kodilla store Selenium example.'
     classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.search.StoreSearchExample'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
+    args System.getProperty('query', 'School')
+}
+
+tasks.register('runEbay', JavaExec) {
+    group = 'application'
+    description = 'Runs the eBay Selenium example.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.ebay.EBayTestingApp'
+    systemProperty 'browser', System.getProperty('browser', 'chrome')
+}
+
+tasks.register('runAllegro', JavaExec) {
+    group = 'application'
+    description = 'Runs the Allegro XPath exercise from lesson 13.4.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.allegro.AllegroTestingApp'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
+}
+
+tasks.register('runLogin', JavaExec) {
+    group = 'application'
+    description = 'Runs the Kodilla login XPath example.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.login.LoginTestingApp'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
+}
+
+tasks.register('runForm', JavaExec) {
+    group = 'application'
+    description = 'Runs the Kodilla form XPath example.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.form.FormTestApp'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
 }
