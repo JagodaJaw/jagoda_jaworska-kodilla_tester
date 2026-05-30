@@ -38,7 +38,7 @@ tasks.register('runEbay', JavaExec) {
 
 tasks.register('runAllegro', JavaExec) {
     group = 'application'
-    description = 'Runs the Allegro XPath exercise from lesson 13.4.'
+    description = 'Runs the Allegro CSS selectors exercise from lesson 13.5.'
     classpath = sourceSets.main.runtimeClasspath
     mainClass = 'com.kodilla.selenium.allegro.AllegroTestingApp'
     systemProperty 'browser', System.getProperty('browser', 'firefox')

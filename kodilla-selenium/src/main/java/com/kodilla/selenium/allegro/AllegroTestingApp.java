@@ -11,8 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class AllegroTestingApp {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         WebDriver driver = createDriver();
         WebDriverWait wait = new WebDriverWait(driver, 20);
 
@@ -26,19 +28,26 @@ public class AllegroTestingApp {
             }
 
             WebElement categoryCombo = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//select[contains(@aria-label, 'Kategoria')]")));
+                    By.cssSelector("select[aria-label*='Kategoria']")));
             Select categorySelect = new Select(categoryCombo);
             categorySelect.selectByVisibleText("Elektronika");
 
             WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//input[@name='string' and @type='search']")));
+                    By.cssSelector("input[name='string'][type='search']")));
             searchField.sendKeys("Mavic mini");
 
             WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[@type='submit' and @aria-label='szukaj']")));
+                    By.cssSelector("button[type='submit'][aria-label='szukaj']")));
             searchButton.click();
 
-            Thread.sleep(5000);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("section article")));
+            List<WebElement> products = driver.findElements(By.cssSelector("section article"));
+
+            System.out.println("Found products: " + products.size());
+            for (WebElement product : products) {
+                System.out.println(product.getText());
+                System.out.println("--------------------");
+            }
         } finally {
             driver.quit();
         }
@@ -67,9 +76,13 @@ public class AllegroTestingApp {
 
     private static void acceptCookiesIfPresent(WebDriver driver) {
         try {
-            WebElement acceptButton = driver.findElement(
-                    By.xpath("//button[contains(., 'Zgadzam się')]"));
-            acceptButton.click();
+            List<WebElement> buttons = driver.findElements(By.tagName("button"));
+            for (WebElement button : buttons) {
+                if (button.getText().contains("Zgadzam się")) {
+                    button.click();
+                    return;
+                }
+            }
         } catch (Exception ignored) {
             // The dialog is only shown for a fresh browser profile.
         }
