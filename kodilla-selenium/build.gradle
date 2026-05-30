@@ -12,6 +12,10 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation(group: 'com.github.lewka', name: 'ocular', version: '1.0.5') {
+        exclude group: 'net.sf', module: 'jargs'
+    }
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
@@ -65,5 +69,13 @@ tasks.register('runPom', JavaExec) {
     description = 'Runs the Kodilla login Page Object Model example from lesson 13.6.'
     classpath = sourceSets.main.runtimeClasspath
     mainClass = 'com.kodilla.selenium.pom.KodillaPomApplication'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
+}
+
+tasks.register('runOcular', JavaExec) {
+    group = 'application'
+    description = 'Runs the visual testing example from lesson 13.7.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.visual.OcularExample'
     systemProperty 'browser', System.getProperty('browser', 'firefox')
 }
