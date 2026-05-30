@@ -59,3 +59,11 @@ tasks.register('runForm', JavaExec) {
     mainClass = 'com.kodilla.selenium.form.FormTestApp'
     systemProperty 'browser', System.getProperty('browser', 'firefox')
 }
+
+tasks.register('runPom', JavaExec) {
+    group = 'application'
+    description = 'Runs the Kodilla login Page Object Model example from lesson 13.6.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.kodilla.selenium.pom.KodillaPomApplication'
+    systemProperty 'browser', System.getProperty('browser', 'firefox')
+}
